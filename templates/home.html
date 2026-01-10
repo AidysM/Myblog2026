@@ -7,7 +7,7 @@
 
 {% block content %}
     <!-- Page Header-->
-    <header class="masthead">
+    <header class="masthead" style="background-image: url('{% static '/assets/home-bg.jpg' %}');">
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
@@ -26,7 +26,7 @@
                 <!-- Post preview-->
                 {% for post in posts %}
                     <div class="post-preview">
-                        <a href="{% url 'blog:post_detail' post.id %}">
+                        <a href="{{ post.get_absolute_url }}">
                             <h2 class="post-title">{{ post.title }}</h2>
                             <h3 class="post-subtitle">{{ post.body|truncatewords:30|linebreaks }}</h3>
                         </a>
@@ -39,6 +39,7 @@
                     <!-- Divider-->
                     <hr class="my-4" />
                 {% endfor %}
+                {% include 'pagination.html' with page=page_obj %}
                 <!-- Post preview-->
                 <!-- <div class="post-preview">
                     <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
